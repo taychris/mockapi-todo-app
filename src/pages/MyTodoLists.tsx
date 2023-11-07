@@ -1,17 +1,8 @@
-import AddTodoListForm from "@/components/AddTodoListForm";
-import TodoLists from "@/components/TodoLists";
+import TodoLists from "@/components/todo-lists/TodoLists";
 import MyTodoListsSkeleton from "@/components/loading/MyTodoListsSkeleton";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import AddTodoListDialog from "@/components/todo-lists/AddTodoListDialog";
 import { getAllTodoLists } from "@/services/api";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { Helmet } from "react-helmet";
 
 const MyTodoLists = () => {
@@ -50,26 +41,3 @@ const MyTodoLists = () => {
 };
 
 export default MyTodoLists;
-
-const AddTodoListDialog = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button
-          title="Add todo list"
-          className="w-1/2 md:w-max md:min-w-[320px]"
-        >
-          Add todo list
-        </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Add your todo list</DialogTitle>
-        </DialogHeader>
-        <AddTodoListForm setIsOpen={setIsOpen} />
-      </DialogContent>
-    </Dialog>
-  );
-};

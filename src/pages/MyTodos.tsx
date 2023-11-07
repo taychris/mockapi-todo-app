@@ -1,48 +1,13 @@
-import AddTodoForm from "@/components/AddTodoForm";
-import Todos from "@/components/Todos";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { getOneTodoList } from "@/services/api";
+import { Helmet } from "react-helmet";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { filterTodos } from "@/lib/utils";
-import { useMemo } from "react";
-import debounce from "lodash.debounce";
+import { getOneTodoList } from "@/services/api";
+import Todos from "@/components/todos/Todos";
 import MyTodosSkeleton from "@/components/loading/MyTodosSkeleton";
-import { Helmet } from "react-helmet";
-
-interface DialogProps {
-  todoList: TodoList;
-}
-
-interface IsFinishedFilterProps extends DialogProps {
-  searchQuery: string;
-  setFilteredTodoList: React.Dispatch<
-    React.SetStateAction<TodoList | undefined>
-  >;
-  setIsFinishedFilter: React.Dispatch<React.SetStateAction<string>>;
-}
-
-interface SearchFilterProps
-  extends Omit<IsFinishedFilterProps, "setIsFinishedFilter" | "searchQuery"> {
-  isFinishedFilter: string;
-  setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-}
+import AddTodoDialog from "@/components/todos/AddTodoDialog";
+import IsFinishedFilter from "@/components/todos/IsFinishedFilter";
+import SearchFilter from "@/components/todos/SearchFilter";
 
 const MyTodos = () => {
   const { id } = useParams();
@@ -62,7 +27,7 @@ const MyTodos = () => {
   if (isLoading) return <MyTodosSkeleton />;
 
   if (isError) return <p>{error.message}</p>;
-  
+
   return (
     <>
       <Helmet>
@@ -116,76 +81,3 @@ const MyTodos = () => {
 };
 
 export default MyTodos;
-
-const AddTodoDialog = ({ todoList }: DialogProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button title="Add todo" className="w-1/2 md:w-max">
-          Add todo
-        </Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Add your todo</DialogTitle>
-        </DialogHeader>
-        <AddTodoForm todoList={todoList} setIsOpen={setIsOpen} />
-      </DialogContent>
-    </Dialog>
-  );
-};
-
-const SearchFilter = ({
-  todoList,
-  isFinishedFilter,
-  setSearchQuery,
-  setFilteredTodoList,
-}: SearchFilterProps) => {
-  const onSearchChange = useMemo(
-    () =>
-      debounce((event: React.ChangeEvent<HTMLInputElement>) => {
-        const searchValue = event.target.value;
-        setSearchQuery(searchValue);
-        setFilteredTodoList(
-          filterTodos(todoList, searchValue, isFinishedFilter)
-        );
-      }, 300),
-    [todoList, isFinishedFilter]
-  );
-
-  return (
-    <Input
-      type="search"
-      className="flex-grow"
-      placeholder="Search by title"
-      onChange={onSearchChange}
-    />
-  );
-};
-
-const IsFinishedFilter = ({
-  searchQuery,
-  todoList,
-  setFilteredTodoList,
-  setIsFinishedFilter,
-}: IsFinishedFilterProps) => {
-  return (
-    <Select
-      onValueChange={(e) => {
-        setIsFinishedFilter(e);
-        setFilteredTodoList(filterTodos(todoList, searchQuery, e));
-      }}
-    >
-      <SelectTrigger className="w-full md:flex-grow-0 md:w-max whitespace-nowrap">
-        <SelectValue placeholder="Filter by" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value={"all"}>All</SelectItem>
-        <SelectItem value={"ongoing"}>Ongoing</SelectItem>
-        <SelectItem value={"finished"}>Finished</SelectItem>
-      </SelectContent>
-    </Select>
-  );
-};

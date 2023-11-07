@@ -12,12 +12,11 @@ import { Label } from "@/components/ui/label";
 import { ErrorInfo } from "@/components/ui/error-info";
 import { useToast } from "@/components/ui/use-toast";
 
-interface Props {
-  todoList: TodoList;
+interface AddTodoFormProps extends TodoListProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AddTodoForm = ({ todoList, setIsOpen }: Props) => {
+const AddTodoForm = ({ todoList, setIsOpen }: AddTodoFormProps) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const {

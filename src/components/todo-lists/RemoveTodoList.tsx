@@ -1,8 +1,6 @@
-import { Link } from "react-router-dom";
-import { Trash2Icon } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Trash2Icon } from "lucide-react";
 import { removeTodoList } from "@/services/api";
-import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,40 +13,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
 
-interface Props {
-  todoItems: TodoList[];
-}
-
-const TodoLists = ({ todoItems }: Props) => {
-  return (
-    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {todoItems?.map((todo) => (
-        <li
-          className="flex items-center justify-center gap-2 text-xl font-medium uppercase"
-          key={todo.id}
-        >
-          <Button asChild variant={"outline"} className="bg-gray-50">
-            <Link to={`/my-todos/${todo.id}`} className="flex-grow group">
-              {todo.title}
-              <span
-                aria-hidden="true"
-                className="pl-1 duration-300 group-hover:pl-2"
-              >
-                →
-              </span>
-            </Link>
-          </Button>
-          <RemoveTodoListButton id={todo.id!} />
-        </li>
-      ))}
-    </ul>
-  );
-};
-
-export default TodoLists;
-
-const RemoveTodoListButton = ({ id }: { id: string }) => {
+const RemoveTodoList = ({ id }: { id: string }) => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
@@ -100,3 +67,4 @@ const RemoveTodoListButton = ({ id }: { id: string }) => {
     </AlertDialog>
   );
 };
+export default RemoveTodoList;

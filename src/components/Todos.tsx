@@ -76,7 +76,7 @@ const TodoDescription = ({ description }: { description: string }) => {
       <PopoverTrigger asChild>
         <Button
           variant={"ghost"}
-          className="block max-w-[190px] md:max-w-xs px-0 py-0 text-sm font-light text-left truncate h-max"
+          className="block max-w-[120px] sm:max-w-[160px] md:max-w-xs px-0 py-0 text-sm font-light text-left truncate h-max"
         >
           {description}
         </Button>

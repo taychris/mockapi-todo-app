@@ -22,7 +22,7 @@ interface Props {
 
 const TodoLists = ({ todoItems }: Props) => {
   return (
-    <ul className="grid grid-cols-3 gap-4">
+    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {todoItems?.map((todo) => (
         <li
           className="flex items-center justify-center gap-2 text-xl font-medium uppercase"

@@ -19,7 +19,7 @@ const Todos = ({ todoList }: TodoListProps) => {
               {todo.title}
             </h1>
             {todo.deadLine && (
-              <div className="flex items-center gap-1 opacity-60">
+              <div className="flex items-center gap-1 opacity-60" title="Deadline">
                 <ClockIcon className="w-3" />
                 <p className="text-xs font-light">
                   {format(parseISO(todo.deadLine.toString()), "dd MMM, yyyy")}

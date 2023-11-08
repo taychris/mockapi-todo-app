@@ -27,16 +27,16 @@ export const filterTodos = (
     if (isFinishedFilter === "finished" && !todo.isFinished) {
       return false;
     }
+
     if (isFinishedFilter === "ongoing" && todo.isFinished) {
       return false;
     }
 
-    if (!todo.title.toLowerCase().includes(searchQuery.toLowerCase())) {
+    if (
+      searchQuery &&
+      !todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+    ) {
       return false;
-    }
-
-    if (searchQuery && isFinishedFilter === "all") {
-      return true;
     }
 
     return true;

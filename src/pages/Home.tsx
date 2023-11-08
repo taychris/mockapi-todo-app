@@ -34,8 +34,14 @@ const Home = () => {
             </p>
             <div className="flex items-center justify-center mt-10 gap-x-6">
               <Button asChild>
-                <Link to="/my-todos" className="gap-2">
-                  Create first todo <span aria-hidden="true">→</span>
+                <Link to="/my-todos" className="group">
+                  Create first todo
+                  <span
+                    aria-hidden="true"
+                    className="pl-1 duration-300 group-hover:pl-2"
+                  >
+                    →
+                  </span>
                 </Link>
               </Button>
             </div>

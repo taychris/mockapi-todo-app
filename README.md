@@ -1,27 +1,64 @@
-# React + TypeScript + Vite
+## Table of Contents
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Technologies](#technologies)
+- [Getting Started](#getting-started)
+- [Demo](#demo)
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The project is a simple Todo app. It incorporates the base functionality of Todo apps. Users may create multiple lists of different todos. These lists may contain Todo items, which can be marked as finished or ongoing and any Todo items can be removed from the list by the click of button. Moreover, the Todo items can be filtered by their state (ongoing, finished or all) and by their title through a search box.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [x] Add Todo lists
+- [x] Remove Todo lists
+- [x] Add Todo items to related Todo list
+- [x] Remove Todo item from related Todo list
+- [x] Mark Todo item as finished or ongoing
+- [x] Confirmation dialog when deleting Todo list or Todo item
+- [x] Toast messages
+- [x] Filtering Todo items based on its state
+- [x] Filtering Todo items based on their title through a search box
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+- React + TypeScript + Vite 
+- react-hook-form
+- zod
+- ReactQuery
+- axios
+- date-fns
+- mockapi.io
+- react-helmet
+- TailwindCSS
+- shadcn-ui
+- lucide-icons
+- Vercel
+
+## Getting Started
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/taychris/mockapi-todo-app.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Go to the project directory and install dependencies
+
+```bash
+npm install
+```
+
+3. Create a `.env` file in both the root directory of the project and add the environment variable `VITE_API_URL`, which should be set to your unique API URL from mockapi.io.
+
+4. To start the dev server, run 
+
+```bash
+npm run dev
+```
+
+## Demo
+
+You can check the function Todo application at: https://todo-app-101.vercel.app

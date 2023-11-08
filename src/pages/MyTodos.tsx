@@ -65,7 +65,7 @@ const MyTodos = () => {
               </>
             )}
           </div>
-          {filteredTodoList?.todos.length > 0 ? (
+          {filteredTodoList.todos.length > 0 ? (
             <Todos todoList={filteredTodoList} />
           ) : (
             data.todos.length > 0 && (

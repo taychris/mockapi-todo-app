@@ -13,13 +13,15 @@ const IsFinishedFilter = ({
   setFilteredTodoList,
   setIsFinishedFilter,
 }: IsFinishedFilterProps) => {
+  const changeSelectedFilter = (selectedFilterValue: string) => {
+    setIsFinishedFilter(selectedFilterValue);
+    setFilteredTodoList(
+      filterTodos(todoList, searchQuery, selectedFilterValue)
+    );
+  };
+
   return (
-    <Select
-      onValueChange={(e) => {
-        setIsFinishedFilter(e);
-        setFilteredTodoList(filterTodos(todoList, searchQuery, e));
-      }}
-    >
+    <Select onValueChange={changeSelectedFilter}>
       <SelectTrigger className="w-full md:flex-grow-0 md:w-max whitespace-nowrap">
         <SelectValue placeholder="Filter by" />
       </SelectTrigger>

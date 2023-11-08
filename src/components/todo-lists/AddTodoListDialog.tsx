@@ -18,7 +18,6 @@ const AddTodoListDialog = () => {
       <DialogTrigger asChild>
         <Button
           title="Add todo list"
-          className="w-1/2 md:w-max md:min-w-[320px]"
         >
           Add todo list
         </Button>
